@@ -109,7 +109,7 @@ ResponseBody:
 {
     "password": "123456",
     "realName": "jpf",
-    "email"; "601@163.com",
+    "email": "601@163.com",
     "status": 1,
     "avatarUrl": "xxx1.jpg"
     
