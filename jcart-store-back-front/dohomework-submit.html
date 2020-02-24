@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="assets/css/elementui.css">
+    <title>dohomework-submit</title>
+</head>
+
+<body>
+    <div id="app">
+        <el-input disabled v-model="courseName" placeholder="请输入课程"></el-input>
+        <el-input disabled v-model="courseUnit" placeholder="请输入单元"></el-input>
+        <el-input disabled v-model="clazzName" placeholder="请输入班级"></el-input>
+        <el-input disabled v-model="teacherName" placeholder="请输入讲师"></el-input>
+        <el-input disabled v-model="studentName" placeholder="请输入学生"></el-input>
+        <br>
+
+        <el-upload class="upload-demo" ref="upload" action="http://localhost:8080/video/upload" :auto-upload="false"
+            multiple name="video" :limit="3" accept="video/*" :on-success="handleOnSuccess">
+            <el-button slot="trigger" size="small" type="primary">选取视频</el-button>
+            <el-button size="small" type="success" @click="handleUploadClick">上传到服务器</el-button>
+        </el-upload>
+        <div v-for="item in videos">
+            <el-link :href="'http://localhost/video/' + item.filename" target="_blank">
+                {{item.filename}}</el-link>
+        </div>
+        <br>
+        <el-button type="primary" @click="handleSubmitClick">提交</el-button>
+    </div>
+
+    <script src="assets/js/axios.min.js"></script>
+    <script src="assets/js/common.js"></script>
+    <script src="assets/js/vue.js"></script>
+    <script src="assets/js/elementui.js"></script>
+    <script src="viewmodels/dohomework-submit.js"></script>
+
+</body>
+
+</html>

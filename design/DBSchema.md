@@ -19,7 +19,7 @@
 | product_code | varchar(50)  | 非空，唯一索引 | 商品代码  |
 | price| double  | 非空 | 商品价格  |
 | discount| double  |  | 打折(0.01~0.99)  |
-| stork_quantity| int  | 非空,默认0 | 商品库存量  |
+| stork_quantity| int  | 非空 | 商品库存量  |
 | starts| tinyint  | 非空,默认1 | 状态(0下架、1上架、2待审核) |
 | sort_order| int  |  | 商品排序(0正序、1倒序)  |
 | reward_points| int  |  | 商品积分  |
