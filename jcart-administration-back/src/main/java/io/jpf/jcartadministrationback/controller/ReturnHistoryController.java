@@ -1,5 +1,6 @@
 package io.jpf.jcartadministrationback.controller;
 
+import com.sun.org.apache.regexp.internal.RE;
 import io.jpf.jcartadministrationback.dto.in.ReturnHistoryCreateInDTO;
 import io.jpf.jcartadministrationback.dto.out.ReturnHistoryListOutDTO;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,6 @@ public class ReturnHistoryController {
 
     @PostMapping("/create")
     public Integer create(@RequestBody ReturnHistoryCreateInDTO returnHistoryCreateInDTO){
-
+        return null;
     }
 }
