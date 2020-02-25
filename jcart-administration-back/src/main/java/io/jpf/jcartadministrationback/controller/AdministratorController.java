@@ -1,10 +1,9 @@
 package io.jpf.jcartadministrationback.controller;
 
-import io.jpf.jcartadministrationback.dto.in.AdministratorLogInDTO;
-import io.jpf.jcartadministrationback.dto.in.AdministratorRestPwdInDTO;
-import io.jpf.jcartadministrationback.dto.in.AdministratorUpdateProfileInDTO;
+import io.jpf.jcartadministrationback.dto.in.*;
 import io.jpf.jcartadministrationback.dto.out.AdministratorGetProfileOutDTO;
 import io.jpf.jcartadministrationback.dto.out.AdministratorListOutDTO;
+import io.jpf.jcartadministrationback.dto.out.AdministratorShowOutDTO;
 import io.jpf.jcartadministrationback.dto.out.PageOutDTO;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class AdministratorController {
 
     @GetMapping("/login")
-    public String login(AdministratorLogInDTO AdministratorLoginDTO){
+    public String login(AdministratorLoginInDTO AdministratorLoginDTO){
 
         return null;
     }
@@ -43,4 +42,18 @@ public class AdministratorController {
         return null;
     }
 
+    @GetMapping("/getById")
+    public AdministratorShowOutDTO getById(@RequestParam Integer administratorId){
+        return null;
+    }
+
+    @PostMapping("/create")
+    public Integer create(@RequestBody AdministratorCreateInDTO administratorCreateInDTO){
+        return null;
+    }
+
+    @PostMapping("/update")
+    public void update(@RequestBody AdministratorUpdateInDTO administratorUpdateInDTO){
+
+    }
 }

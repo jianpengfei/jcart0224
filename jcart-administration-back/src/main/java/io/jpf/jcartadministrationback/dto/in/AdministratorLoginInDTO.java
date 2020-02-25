@@ -1,6 +1,6 @@
 package io.jpf.jcartadministrationback.dto.in;
 
-public class AdministratorLogInDTO {
+public class AdministratorLoginInDTO {
 
     private String username;
     private String password;
