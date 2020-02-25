@@ -1,26 +1,26 @@
 package io.jpf.jcartadministrationback.dto.in;
 
-public class OrderHistoryCreateInDTO {
+public class ReturnHistoryCreateInDTO {
 
-    private Long orderHistoryId;
-    private Byte orderStarts;
+    private Integer returnId;
+    private Byte returnStarts;
     private String comment;
     private Boolean customerNotified;
 
-    public Long getOrderHistoryId() {
-        return orderHistoryId;
+    public Integer getReturnId() {
+        return returnId;
     }
 
-    public void setOrderHistoryId(Long orderHistoryId) {
-        this.orderHistoryId = orderHistoryId;
+    public void setReturnId(Integer returnId) {
+        this.returnId = returnId;
     }
 
-    public Byte getOrderStarts() {
-        return orderStarts;
+    public Byte getReturnStarts() {
+        return returnStarts;
     }
 
-    public void setOrderStarts(Byte orderStarts) {
-        this.orderStarts = orderStarts;
+    public void setReturnStarts(Byte returnStarts) {
+        this.returnStarts = returnStarts;
     }
 
     public String getComment() {

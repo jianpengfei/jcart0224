@@ -1,19 +1,19 @@
 package io.jpf.jcartadministrationback.dto.out;
 
-public class OrderHistoryListOutDTO {
+public class ReturnHistoryListOutDTO {
 
-    private Long orderHistoryId;
+    private Long returnHistoryId;
     private Long timestamp;
-    private Byte orderStarts;
+    private Byte returnStatus;
     private String comment;
     private Boolean customerNotified;
 
-    public Long getOrderHistoryId() {
-        return orderHistoryId;
+    public Long getReturnHistoryId() {
+        return returnHistoryId;
     }
 
-    public void setOrderHistoryId(Long orderHistoryId) {
-        this.orderHistoryId = orderHistoryId;
+    public void setReturnHistoryId(Long returnHistoryId) {
+        this.returnHistoryId = returnHistoryId;
     }
 
     public Long getTimestamp() {
@@ -24,12 +24,12 @@ public class OrderHistoryListOutDTO {
         this.timestamp = timestamp;
     }
 
-    public Byte getOrderStarts() {
-        return orderStarts;
+    public Byte getReturnStatus() {
+        return returnStatus;
     }
 
-    public void setOrderStarts(Byte orderStarts) {
-        this.orderStarts = orderStarts;
+    public void setReturnStatus(Byte returnStatus) {
+        this.returnStatus = returnStatus;
     }
 
     public String getComment() {
