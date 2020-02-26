@@ -8,11 +8,12 @@ public class ProductUpdateInDTO {
     private String productName;
     private Double price;
     private Double discount;
-    private Integer storkQuantity;
+    private Integer stockQuantity;
     private Byte status;
     private String mainPicUrl;
-    private Integer rewardPoints;
+    private Integer rewordPoints;
     private Integer sortOrder;
+    private String description;
     private List<String> otherPicUrls;
 
     public Integer getProductId() {
@@ -47,12 +48,12 @@ public class ProductUpdateInDTO {
         this.discount = discount;
     }
 
-    public Integer getStorkQuantity() {
-        return storkQuantity;
+    public Integer getStockQuantity() {
+        return stockQuantity;
     }
 
-    public void setStorkQuantity(Integer storkQuantity) {
-        this.storkQuantity = storkQuantity;
+    public void setStockQuantity(Integer stockQuantity) {
+        this.stockQuantity = stockQuantity;
     }
 
     public Byte getStatus() {
@@ -71,12 +72,12 @@ public class ProductUpdateInDTO {
         this.mainPicUrl = mainPicUrl;
     }
 
-    public Integer getRewardPoints() {
-        return rewardPoints;
+    public Integer getRewordPoints() {
+        return rewordPoints;
     }
 
-    public void setRewardPoints(Integer rewardPoints) {
-        this.rewardPoints = rewardPoints;
+    public void setRewordPoints(Integer rewordPoints) {
+        this.rewordPoints = rewordPoints;
     }
 
     public Integer getSortOrder() {
@@ -85,6 +86,14 @@ public class ProductUpdateInDTO {
 
     public void setSortOrder(Integer sortOrder) {
         this.sortOrder = sortOrder;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public List<String> getOtherPicUrls() {
