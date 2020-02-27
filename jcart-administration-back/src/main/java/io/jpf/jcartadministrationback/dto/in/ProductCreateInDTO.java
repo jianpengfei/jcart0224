@@ -1,7 +1,10 @@
 package io.jpf.jcartadministrationback.dto.in;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
+@Repository
 public class ProductCreateInDTO {
 
     private String productCode;

@@ -1,5 +1,10 @@
 package io.jpf.jcartadministrationback.service.Impl;
 
+
+
+//@Service
+//一般用于修饰service层的组件
+
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -18,6 +23,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+//@AutoWired
+//byType方式。把配置好的Bean拿来用，完成属性、方法的组装，它可以对类成员变量、方法及构造函数进行标注，完成自动装配的工作。
+//当加上（required=false）时，就算找不到bean也不报错
 @Service
 public class ProductServiceImpl implements ProductService {
 
@@ -28,6 +36,7 @@ public class ProductServiceImpl implements ProductService {
     private ProductDetailMapper productDetailMapper;
 
     @Override
+    @Transactional
     public Integer create(ProductCreateInDTO productCreateInDTO) {
 
         Product product = new Product();
@@ -44,6 +53,7 @@ public class ProductServiceImpl implements ProductService {
         String productAbstract = description.substring(0, Math.min(100, description.length()));
         product.setProductAbstract(productAbstract);
         productMapper.insertSelective(product);
+        System.out.println(product.getProductId());
 
         Integer productId = product.getProductId();
         ProductDetail productDetail = new ProductDetail();
@@ -52,7 +62,6 @@ public class ProductServiceImpl implements ProductService {
         List<String> otherPicUrls = productCreateInDTO.getOtherPicUrls();
         productDetail.setOtherPicUrls(JSON.toJSONString(otherPicUrls));
         productDetailMapper.insertSelective(productDetail);
-
 
         return productId;
     }

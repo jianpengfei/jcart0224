@@ -6,6 +6,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+//@Repository
+//    注解可以确保DAO或者repositories提供异常转译，
+//     这个注解修饰的DAO或者repositories类会被ComponetScan发现并配置，
+//     同时也不需要为它们提供XML配置项
 @Repository
 public interface ProductDetailMapper {
     int deleteByPrimaryKey(Integer productId);

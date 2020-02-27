@@ -20,6 +20,13 @@ public class ImageController {
 
     private List<String> imageExts= Arrays.asList("jpg","jpeg","png");
 
+    /**
+     *
+     * @param image
+     * @return
+     * @throws IOException
+     * @throws ClientException
+     */
     @PostMapping("/upload")
     public String upload(@RequestParam MultipartFile image) throws IOException, ClientException {
         String originalFilename = image.getOriginalFilename();
