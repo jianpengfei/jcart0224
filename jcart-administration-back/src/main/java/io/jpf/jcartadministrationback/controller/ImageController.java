@@ -2,10 +2,7 @@ package io.jpf.jcartadministrationback.controller;
 
 import io.jpf.jcartadministrationback.constant.ClientExceptionConstant;
 import io.jpf.jcartadministrationback.exception.ClientException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileOutputStream;
@@ -16,12 +13,13 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/image")
+@CrossOrigin
 public class ImageController {
 
     private List<String> imageExts= Arrays.asList("jpg","jpeg","png");
 
     /**
-     *
+     *  图片添加
      * @param image
      * @return
      * @throws IOException
@@ -33,7 +31,7 @@ public class ImageController {
         String[] splits = originalFilename.split("\\.");
         String ext = splits[splits.length - 1];
         ext = ext.toLowerCase();
-        //todo judge with content type
+        //todo judge with content type(用内容类型来判断)
         boolean contains = imageExts.contains(ext);
         if (!contains){
             throw new ClientException(ClientExceptionConstant.IMAGE_INVALID_ERRCODE, ClientExceptionConstant.IMAGE_INVALID_ERRMSG);
