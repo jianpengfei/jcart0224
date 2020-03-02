@@ -50,6 +50,11 @@ public class AdministratorController {
         }
     }
 
+    /**
+     *  RequestAttribute administratorId 通过解析拿到的
+     * @param administratorId
+     * @return
+     */
     @GetMapping("/getProfile")
     public AdministratorGetProfileOutDTO getProfile(@RequestAttribute Integer administratorId){
         Administrator administrator = administratorService.getById(administratorId);

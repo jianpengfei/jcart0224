@@ -16,6 +16,12 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Set;
+
+
+/**
+ * filter  过滤器 属于tomcat servlet (简单 实用)
+ * intercept  拦截器  属于 spring MVC (功能强大  不建议使用)
+ */
 @Order(2)
 @Component
 public class LoginFilter implements Filter {
@@ -58,6 +64,7 @@ public class LoginFilter implements Filter {
 
         AdministratorLoginVO administratorLoginVO = null;
         try {
+            //进行验证 token
             administratorLoginVO = jwtUtil.verifyToken(token);
         }catch (JWTVerificationException ex){
             throw new ClientException(ClientExceptionConstant.TOKEN_INVALID_ERRCODE, ex.getMessage());

@@ -14,6 +14,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+/**
+ *  登录
+ *   无状态  token(不依赖服务器的存储,内存,存依靠CPU来计算,非常适合分布式喝集群)
+ */
 @Component
 public class JWTUtil {
 
