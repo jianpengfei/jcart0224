@@ -4,6 +4,14 @@ var app = new Vue({
 
         myShoppingCart: []
     },
+    //watch  观察
+    /*watch: {
+        totalPrice: function (newVal, oldVal) {
+            console.log('my total price change', newVal);
+            localStorage['myShoppingCartJson'] = JSON.stringify(this.myShoppingCart);
+            this.$message.success('修改购物车成功');
+        }
+    },*/
     computed: {
         totalPrice() {
             var subTotalPrices = this.myShoppingCart.map(p => {
@@ -15,13 +23,6 @@ var app = new Vue({
             return totalPrice;
         }
     },
-    /*watch: {
-        totalPrice: function (newVal, oldVal) {
-            console.log('my total price change', newVal);
-            localStorage['myShoppingCartJson'] = JSON.stringify(this.myShoppingCart);
-            this.$message.success('修改购物车成功');
-        }
-    },*/
     mounted() {
         console.log('view mounted');
         /*var myShoppingCart = localStorage['myShoppingCart'];
