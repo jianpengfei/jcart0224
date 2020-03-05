@@ -1,6 +1,6 @@
 package io.jpf.jcartadministrationback.dto.out;
 
-public class AddressListOutDTO {
+public class AddressShowOutDTO {
 
     private Integer addressId;
     private String receiverName;
