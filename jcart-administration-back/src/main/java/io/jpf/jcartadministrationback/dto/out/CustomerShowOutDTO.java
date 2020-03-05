@@ -3,7 +3,7 @@ package io.jpf.jcartadministrationback.dto.out;
 public class CustomerShowOutDTO {
 
     private Integer customerId;
-    private String userName;
+    private String username;
     private String realName;
     private String email;
     private String mobile;
@@ -11,7 +11,7 @@ public class CustomerShowOutDTO {
     private Byte status;
     private Long createTimestamp;
     private Boolean newsSubscribed;
-    private Integer rewardPoints;
+    private Integer rewordPoints;
     private Integer defaultAddressId;
     private String defaultAddress;
 
@@ -23,12 +23,12 @@ public class CustomerShowOutDTO {
         this.customerId = customerId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getRealName() {
@@ -87,12 +87,12 @@ public class CustomerShowOutDTO {
         this.newsSubscribed = newsSubscribed;
     }
 
-    public Integer getRewardPoints() {
-        return rewardPoints;
+    public Integer getRewordPoints() {
+        return rewordPoints;
     }
 
-    public void setRewardPoints(Integer rewardPoints) {
-        this.rewardPoints = rewardPoints;
+    public void setRewordPoints(Integer rewordPoints) {
+        this.rewordPoints = rewordPoints;
     }
 
     public Integer getDefaultAddressId() {
