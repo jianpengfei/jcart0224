@@ -1,14 +1,17 @@
 package io.jpf.jcartadministrationback.dto.out;
 
+import io.jpf.jcartadministrationback.vo.OrderProductVO;
+
 import java.util.List;
 
 public class OrderShowOutDTO {
 
-    private Integer orderId;
+    private Long orderId;
     private Integer customerId;
+    private String customerName;
     private Byte status;
     private Double totalPrice;
-    private Integer rewardPoints;
+    private Integer rewordPoints;
     private Long createTimestamp;
     private Long updateTimestamp;
     private Short shipMethod;
@@ -18,13 +21,13 @@ public class OrderShowOutDTO {
     private String invoiceAddress;
     private Double invoicePrice;
     private String comment;
-    private List<OrderProductShowOutDTO> orderProducts;
+    private List<OrderProductVO> orderProducts;
 
-    public Integer getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Integer orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 
@@ -34,6 +37,14 @@ public class OrderShowOutDTO {
 
     public void setCustomerId(Integer customerId) {
         this.customerId = customerId;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
     public Byte getStatus() {
@@ -52,12 +63,12 @@ public class OrderShowOutDTO {
         this.totalPrice = totalPrice;
     }
 
-    public Integer getRewardPoints() {
-        return rewardPoints;
+    public Integer getRewordPoints() {
+        return rewordPoints;
     }
 
-    public void setRewardPoints(Integer rewardPoints) {
-        this.rewardPoints = rewardPoints;
+    public void setRewordPoints(Integer rewordPoints) {
+        this.rewordPoints = rewordPoints;
     }
 
     public Long getCreateTimestamp() {
@@ -132,11 +143,11 @@ public class OrderShowOutDTO {
         this.comment = comment;
     }
 
-    public List<OrderProductShowOutDTO> getOrderProducts() {
+    public List<OrderProductVO> getOrderProducts() {
         return orderProducts;
     }
 
-    public void setOrderProducts(List<OrderProductShowOutDTO> orderProducts) {
+    public void setOrderProducts(List<OrderProductVO> orderProducts) {
         this.orderProducts = orderProducts;
     }
 }

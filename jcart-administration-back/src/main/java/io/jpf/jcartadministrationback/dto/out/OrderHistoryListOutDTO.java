@@ -4,7 +4,7 @@ public class OrderHistoryListOutDTO {
 
     private Long orderHistoryId;
     private Long timestamp;
-    private Byte orderStarts;
+    private Byte orderStatus;
     private String comment;
     private Boolean customerNotified;
 
@@ -24,12 +24,12 @@ public class OrderHistoryListOutDTO {
         this.timestamp = timestamp;
     }
 
-    public Byte getOrderStarts() {
-        return orderStarts;
+    public Byte getOrderStatus() {
+        return orderStatus;
     }
 
-    public void setOrderStarts(Byte orderStarts) {
-        this.orderStarts = orderStarts;
+    public void setOrderStatus(Byte orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     public String getComment() {
