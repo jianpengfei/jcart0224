@@ -1,5 +1,6 @@
 package io.jpf.jcartstoreback.controller;
 
+import com.github.pagehelper.Page;
 import io.jpf.jcartstoreback.dto.in.ReturnApplyInDTO;
 import io.jpf.jcartstoreback.dto.out.PageOutDTO;
 import io.jpf.jcartstoreback.dto.out.ReturnListOutDTO;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/return")
@@ -51,8 +54,29 @@ public class ReturnController {
 
     @GetMapping("/getList")
     public PageOutDTO<ReturnListOutDTO> getList(@RequestAttribute Integer customerId,
-                                                @RequestParam Integer pageNum){
-        return null;
+                                                @RequestParam(required = false, defaultValue = "1") Integer pageNum){
+
+        //获取实体类
+        Page<Return> page = returnService.getPageByCustomerId(customerId, pageNum);
+        //stream map 映射
+        List<ReturnListOutDTO> returnListOutDTOS = page.stream().map(aReturn -> {
+            ReturnListOutDTO returnListOutDTO = new ReturnListOutDTO();
+            returnListOutDTO.setReturnId(aReturn.getReturnId());
+            returnListOutDTO.setOrderId(aReturn.getOrderId());
+            returnListOutDTO.setCustomerId(aReturn.getCustomerId());
+            returnListOutDTO.setCustomerName(aReturn.getCustomerName());
+            returnListOutDTO.setStatus(aReturn.getStatus());
+            returnListOutDTO.setCreateTimestamp(aReturn.getCreateTime().getTime());
+            return returnListOutDTO;
+        }).collect(Collectors.toList());
+
+        PageOutDTO<ReturnListOutDTO> pageOutDTO = new PageOutDTO<>();
+        pageOutDTO.setTotal(page.getTotal());
+        pageOutDTO.setPageSize(page.getPageSize());
+        pageOutDTO.setPageNum(page.getPageNum());
+        pageOutDTO.setList(returnListOutDTOS);
+
+        return pageOutDTO;
     }
 
     @GetMapping("/getById")
