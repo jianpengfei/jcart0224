@@ -7,6 +7,7 @@ public class ReturnListOutDTO {
     private Integer customerId;
     private String customerName;
     private String productCode;
+    private String productName;
     private Byte status;
     private Long createTimestamp;
     private Long updateTimestamp;
@@ -73,5 +74,13 @@ public class ReturnListOutDTO {
 
     public void setUpdateTimestamp(Long updateTimestamp) {
         this.updateTimestamp = updateTimestamp;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 }
