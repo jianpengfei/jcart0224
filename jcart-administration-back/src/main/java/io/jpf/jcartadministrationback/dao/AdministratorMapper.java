@@ -21,10 +21,12 @@ public interface AdministratorMapper {
 
     int updateByPrimaryKey(Administrator record);
 
-    //    custom
+    //custom
     Administrator selectByUsername(@Param("username") String username);
 
     int batchDelete(@Param("administratorIds") List<Integer> administratorIds);
 
     Page<Administrator> selectList();
+
+    Administrator selectByEmail(@Param("email") String email);
 }

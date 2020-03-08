@@ -56,4 +56,10 @@ public class AdministratorServiceSImpl implements AdministratorService {
         Page<Administrator> page = administratorMapper.selectList();
         return page;
     }
+
+    @Override
+    public Administrator getByEmail(String email) {
+        Administrator administrator = administratorMapper.selectByEmail(email);
+        return administrator;
+    }
 }
