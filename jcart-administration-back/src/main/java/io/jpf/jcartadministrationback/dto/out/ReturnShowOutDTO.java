@@ -4,14 +4,15 @@ public class ReturnShowOutDTO {
 
     private Integer returnId;
     private Long orderId;
+    private Long orderTimestamp;
     private Integer customerId;
     private String customerName;
-    private String email;
     private String mobile;
+    private String email;
     private Byte status;
     private Byte action;
-    private String productName;
     private String productCode;
+    private String productName;
     private Integer quantity;
     private Byte reason;
     private Boolean opened;
@@ -145,5 +146,13 @@ public class ReturnShowOutDTO {
 
     public void setUpdateTimestamp(Long updateTimestamp) {
         this.updateTimestamp = updateTimestamp;
+    }
+
+    public Long getOrderTimestamp() {
+        return orderTimestamp;
+    }
+
+    public void setOrderTimestamp(Long orderTimestamp) {
+        this.orderTimestamp = orderTimestamp;
     }
 }
