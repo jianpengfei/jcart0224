@@ -3,9 +3,9 @@ package io.jpf.jcartadministrationback.dto.in;
 public class ReturnHistoryCreateInDTO {
 
     private Integer returnId;
-    private Byte returnStarts;
-    private String comment;
+    private Byte returnStatus;
     private Boolean customerNotified;
+    private String comment;
 
     public Integer getReturnId() {
         return returnId;
@@ -15,12 +15,12 @@ public class ReturnHistoryCreateInDTO {
         this.returnId = returnId;
     }
 
-    public Byte getReturnStarts() {
-        return returnStarts;
+    public Byte getReturnStatus() {
+        return returnStatus;
     }
 
-    public void setReturnStarts(Byte returnStarts) {
-        this.returnStarts = returnStarts;
+    public void setReturnStatus(Byte returnStatus) {
+        this.returnStatus = returnStatus;
     }
 
     public String getComment() {
