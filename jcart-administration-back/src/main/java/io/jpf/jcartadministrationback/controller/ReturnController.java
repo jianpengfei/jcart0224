@@ -2,6 +2,7 @@ package io.jpf.jcartadministrationback.controller;
 
 import com.github.pagehelper.Page;
 import io.jpf.jcartadministrationback.dto.in.ReturnSearchInDTO;
+import io.jpf.jcartadministrationback.dto.in.ReturnUpdateActionInDTO;
 import io.jpf.jcartadministrationback.dto.in.ReturnUpdateInDTO;
 import io.jpf.jcartadministrationback.dto.out.PageOutDTO;
 import io.jpf.jcartadministrationback.dto.out.ReturnListOutDTO;
@@ -11,6 +12,7 @@ import io.jpf.jcartadministrationback.service.ReturnService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -76,7 +78,12 @@ public class ReturnController {
     }
 
     @PostMapping("/updateAction")
-    public void updateAction(@RequestBody ReturnUpdateInDTO returnUpdateInDTO){
+    public void updateAction(@RequestBody ReturnUpdateActionInDTO returnUpdateActionInDTO) {
+        Return aReturn = new Return();
+        aReturn.setReturnId(returnUpdateActionInDTO.getReturnId());
+        aReturn.setAction(returnUpdateActionInDTO.getAction());
+        aReturn.setUpdateTime(new Date());
+        returnService.update(aReturn);
     }
 
 
