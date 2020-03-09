@@ -129,25 +129,26 @@ public class AdministratorController {
         mailSender.send(message);
 
         //todo send messasge to MQ
+        //存入map集合
         emailPwdResetCodeMap.put(email, hex);
     }
 
     @PostMapping("/resetPwd")
     public void resetPwd(@RequestBody AdministratorResetPwdInDTO administratorResetPwdInDTO) throws ClientException {
 
-        //判断传入密码是否为空
+        //判断邮箱是否为空  抛异常
         String email = administratorResetPwdInDTO.getEmail();
         if (email == null) {
             throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_PWDRESET_EMAIL_NONE_ERRCODE, ClientExceptionConstant.ADMINISTRATOR_PWDRESET_EMAIL_NONE_ERRMSG);
         }
 
-        //判断innerResetCode如果为空  email不存在  抛异常
+        //判根据邮箱获取重置码是否为空  抛异常
         String innerResetCode = emailPwdResetCodeMap.get(email);
         if (innerResetCode == null) {
             throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_PWDRESET_INNER_RESETCODE_NONE_ERRCODE, ClientExceptionConstant.ADMINISTRATOR_PWDRESET_INNER_RESETCODE_NONE_ERRMSG);
         }
 
-        //innerResetCode不为空进行比较
+        //判外面得重置码是否为空 抛异常
         String outerResetCode = administratorResetPwdInDTO.getResetCode();
         if (outerResetCode == null) {
             throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_PWDRESET_OUTER_RESETCODE_NONE_ERRCODE, ClientExceptionConstant.ADMINISTRATOR_PWDRESET_OUTER_RESETCODE_NONE_ERRMSG);
@@ -158,13 +159,13 @@ public class AdministratorController {
             throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_PWDRESET_RESETCODE_INVALID_ERRCODE, ClientExceptionConstant.ADMINISTRATOR_PWDRESET_RESETCODE_INVALID_ERRMSG);
         }
 
-        //判断email是否存在
+        //判断根据email从数据库获取客户是否为空  抛异常
         Administrator administrator = administratorService.getByEmail(email);
         if (administrator == null){
             throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_EMAIL_NOT_EXIST_ERRCODE, ClientExceptionConstant.ADMINISTRATOR_EMAIL_NOT_EXIST_ERRMSG);
         }
 
-        //判断新密码是否为空
+        //判断新密码是否为空  抛异常
         String newPwd = administratorResetPwdInDTO.getNewPwd();
         if (newPwd == null){
             throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_NEWPWD_NOT_EXIST_ERRCODE, ClientExceptionConstant.ADMINISTRATOR_NEWPWD_NOT_EXIST_ERRMSG);
@@ -173,6 +174,9 @@ public class AdministratorController {
         String bcryptHashString = BCrypt.withDefaults().hashToString(12, newPwd.toCharArray());
         administrator.setEncryptedPassword(bcryptHashString);
         administratorService.update(administrator);
+
+        //删除用过的重置码  维护代码安全  (每使用一次  就进行删除)
+        emailPwdResetCodeMap.remove(email);
 
     }
 
