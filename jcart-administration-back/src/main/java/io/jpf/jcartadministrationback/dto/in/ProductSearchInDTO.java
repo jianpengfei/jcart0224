@@ -5,7 +5,7 @@ public class ProductSearchInDTO {
     private String productCode;
     private String productName;
     private Double price;
-    private Integer storkQuantity;
+    private Integer stockQuantity;
     private Byte status;
 
     public String getProductCode() {
@@ -32,12 +32,12 @@ public class ProductSearchInDTO {
         this.price = price;
     }
 
-    public Integer getStorkQuantity() {
-        return storkQuantity;
+    public Integer getStockQuantity() {
+        return stockQuantity;
     }
 
-    public void setStorkQuantity(Integer storkQuantity) {
-        this.storkQuantity = storkQuantity;
+    public void setStockQuantity(Integer stockQuantity) {
+        this.stockQuantity = stockQuantity;
     }
 
     public Byte getStatus() {

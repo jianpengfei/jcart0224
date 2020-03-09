@@ -2,6 +2,7 @@ package io.jpf.jcartadministrationback.service;
 
 import com.github.pagehelper.Page;
 import io.jpf.jcartadministrationback.dto.in.ProductCreateInDTO;
+import io.jpf.jcartadministrationback.dto.in.ProductSearchInDTO;
 import io.jpf.jcartadministrationback.dto.in.ProductUpdateInDTO;
 import io.jpf.jcartadministrationback.dto.out.ProductListOutDTO;
 import io.jpf.jcartadministrationback.dto.out.ProductShowOutDTO;
@@ -18,7 +19,7 @@ public interface ProductService {
 
     void batchDelete(List<Integer> productIds);
 
-    Page<ProductListOutDTO> search(Integer pageNum);
+    Page<ProductListOutDTO> search(ProductSearchInDTO productSearchInDTO, Integer pageNum);
 
     ProductShowOutDTO getById(Integer productId);
 }
