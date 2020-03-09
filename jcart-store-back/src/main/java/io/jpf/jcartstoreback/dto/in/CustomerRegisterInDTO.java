@@ -2,19 +2,19 @@ package io.jpf.jcartstoreback.dto.in;
 
 public class CustomerRegisterInDTO {
 
-    private String userName;
+    private String username;
     private String realName;
     private String email;
     private String mobile;
     private String password;
-    private Boolean newsubscribed;
+    private Boolean newsSubscribed;
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getRealName() {
@@ -49,11 +49,11 @@ public class CustomerRegisterInDTO {
         this.password = password;
     }
 
-    public Boolean getNewsubscribed() {
-        return newsubscribed;
+    public Boolean getNewsSubscribed() {
+        return newsSubscribed;
     }
 
-    public void setNewsubscribed(Boolean newsubscribed) {
-        this.newsubscribed = newsubscribed;
+    public void setNewsSubscribed(Boolean newsSubscribed) {
+        this.newsSubscribed = newsSubscribed;
     }
 }

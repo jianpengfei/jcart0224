@@ -3,7 +3,7 @@ package io.jpf.jcartstoreback.dto.out;
 public class CustomerGetProfileOutDTO {
 
     private Integer customerId;
-    private String userName;
+    private String username;
     private String realName;
     private String email;
     private Boolean emailVerified;
@@ -18,12 +18,12 @@ public class CustomerGetProfileOutDTO {
         this.customerId = customerId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getRealName() {

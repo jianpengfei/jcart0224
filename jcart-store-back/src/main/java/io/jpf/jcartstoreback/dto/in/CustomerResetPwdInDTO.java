@@ -3,7 +3,7 @@ package io.jpf.jcartstoreback.dto.in;
 public class CustomerResetPwdInDTO {
 
     private String email;
-    private String originPwd;
+    private String resetCode;
     private String newPwd;
 
     public String getEmail() {
@@ -14,12 +14,12 @@ public class CustomerResetPwdInDTO {
         this.email = email;
     }
 
-    public String getOriginPwd() {
-        return originPwd;
+    public String getResetCode() {
+        return resetCode;
     }
 
-    public void setOriginPwd(String originPwd) {
-        this.originPwd = originPwd;
+    public void setResetCode(String resetCode) {
+        this.resetCode = resetCode;
     }
 
     public String getNewPwd() {
