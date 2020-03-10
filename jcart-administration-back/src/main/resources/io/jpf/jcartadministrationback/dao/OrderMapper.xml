@@ -10,6 +10,15 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+    <resultMap id="OrderListOutDTO" type="io.jpf.jcartadministrationback.dto.out.OrderListOutDTO">
+        <id column="order_id" jdbcType="BIGINT" property="orderId" />
+        <result column="customer_id" jdbcType="INTEGER" property="customerId" />
+        <result column="real_name" jdbcType="VARCHAR" property="customerName" />
+        <result column="status" jdbcType="TINYINT" property="status" />
+        <result column="total_price" jdbcType="DOUBLE" property="totalPrice" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    </resultMap>
   <sql id="Base_Column_List">
     order_id, customer_id, status, total_price, reword_points, create_time, update_time
   </sql>
@@ -240,9 +249,29 @@
 
     <!--  custom-->
     <select id="search" resultMap="OrderListOutDTO">
-    select o.*,c.real_name from jcart_order as o
-    left join jcart_customer as c
-    on o.customer_id = c.customer_id
-    order by create_time desc
-  </select>
+        SELECT o.*,c.real_name FROM jcart_order as o
+        left join jcart_customer as c
+        on o.customer_id = c.customer_id
+        <where>
+            <if test="orderId != null">
+                order_id = #{orderId}
+            </if>
+            <if test="startTime != null">
+                AND o.create_time &gt;= #{startTime}
+            </if>
+            <if test="endTime != null">
+                AND o.create_time &lt;= #{endTime}
+            </if>
+            <if test="status != null">
+                AND o.status = #{status}
+            </if>
+            <if test="totalPrice != null">
+                AND total_price = #{totalPrice}
+            </if>
+            <if test="customerName != null and customerName != ''">
+                AND real_name like concat('%',#{customerName},'%')
+            </if>
+        </where>
+        order by create_time desc
+    </select>
 </mapper>

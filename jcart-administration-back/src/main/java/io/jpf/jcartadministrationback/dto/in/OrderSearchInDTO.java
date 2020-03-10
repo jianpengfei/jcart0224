@@ -2,17 +2,15 @@ package io.jpf.jcartadministrationback.dto.in;
 
 public class OrderSearchInDTO {
 
-    private Integer orderId;
+    private Long orderId;
     private String customerName;
     private Byte status;
     private Double totalPrice;
+    private Long startTimestamp;
+    private Long endTimestamp;
 
-    public Integer getOrderId() {
+    public Long getOrderId() {
         return orderId;
-    }
-
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
     }
 
     public String getCustomerName() {
@@ -37,5 +35,25 @@ public class OrderSearchInDTO {
 
     public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
+    }
+
+    public Long getStartTimestamp() {
+        return startTimestamp;
+    }
+
+    public void setStartTimestamp(Long startTimestamp) {
+        this.startTimestamp = startTimestamp;
+    }
+
+    public Long getEndTimestamp() {
+        return endTimestamp;
+    }
+
+    public void setEndTimestamp(Long endTimestamp) {
+        this.endTimestamp = endTimestamp;
     }
 }

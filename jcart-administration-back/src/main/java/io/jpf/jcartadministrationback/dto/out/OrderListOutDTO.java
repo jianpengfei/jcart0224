@@ -82,4 +82,12 @@ public class OrderListOutDTO {
     public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
     }
+
+    public void setCreateTimestamp(Long createTimestamp) {
+        this.createTimestamp = createTimestamp;
+    }
+
+    public void setUpdateTimestamp(Long updateTimestamp) {
+        this.updateTimestamp = updateTimestamp;
+    }
 }
