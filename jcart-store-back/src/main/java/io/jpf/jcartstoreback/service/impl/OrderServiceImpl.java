@@ -7,14 +7,15 @@ import io.jpf.jcartstoreback.dao.OrderDetailMapper;
 import io.jpf.jcartstoreback.dao.OrderMapper;
 import io.jpf.jcartstoreback.dto.in.OrderCheckoutInDTO;
 import io.jpf.jcartstoreback.dto.in.OrderProductInDTO;
+import io.jpf.jcartstoreback.dto.out.OrderHistoryListOutDTO;
+import io.jpf.jcartstoreback.dto.out.OrderShowOutDTO;
 import io.jpf.jcartstoreback.enumeration.OrderStatus;
-import io.jpf.jcartstoreback.po.Address;
-import io.jpf.jcartstoreback.po.Order;
-import io.jpf.jcartstoreback.po.OrderDetail;
-import io.jpf.jcartstoreback.po.Product;
+import io.jpf.jcartstoreback.po.*;
 import io.jpf.jcartstoreback.service.AddressService;
+import io.jpf.jcartstoreback.service.OrderHistoryService;
 import io.jpf.jcartstoreback.service.OrderService;
 import io.jpf.jcartstoreback.service.ProductService;
+
 import io.jpf.jcartstoreback.vo.OrderProductVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,14 +40,15 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private AddressService addressService;
 
+    @Autowired
+    private OrderHistoryService orderHistoryService;
+
     @Override
     @Transactional
     public Long checkout(OrderCheckoutInDTO orderCheckoutInDTO,
                          Integer customerId) {
 
-        //拿到所有商品
         List<OrderProductInDTO> orderProductInDTOS = orderCheckoutInDTO.getOrderProducts();
-        //查询所有的商品 用stream().map()映射
         List<OrderProductVO> orderProductVOS = orderProductInDTOS.stream().map(orderProductInDTO -> {
             Product orderProduct = productService.getById(orderProductInDTO.getProductId());
             OrderProductVO orderProductVO = new OrderProductVO();
@@ -66,12 +68,9 @@ public class OrderServiceImpl implements OrderService {
             return orderProductVO;
         }).collect(Collectors.toList());
 
-        //所有的总价
         double allTotalPrice = orderProductVOS.stream().mapToDouble(p -> p.getTotalPrice()).sum();
-        //积分总和
         int allTotalRewordPoints = orderProductVOS.stream().mapToInt(p -> p.getTotalRewordPoints()).sum();
 
-        //订单表
         Order order = new Order();
         order.setCustomerId(customerId);
         order.setStatus((byte) OrderStatus.ToProcess.ordinal());
@@ -84,11 +83,10 @@ public class OrderServiceImpl implements OrderService {
         orderMapper.insertSelective(order);
         Long orderId = order.getOrderId();
 
-        //订单附表
         OrderDetail orderDetail = new OrderDetail();
         orderDetail.setOrderId(orderId);
         orderDetail.setShipMethod(orderCheckoutInDTO.getShipMethod());
-        //todo calculate ship price with ship method(暂时写死)
+        //todo calculate ship price with ship method
         orderDetail.setShipPrice(5.0);
         Address shipAddress = addressService.getById(orderCheckoutInDTO.getShipAddressId());
         orderDetail.setShipAddress(shipAddress.getContent());
@@ -97,13 +95,14 @@ public class OrderServiceImpl implements OrderService {
         orderDetail.setInvoicePrice(allTotalPrice);
         Address invoiceAddress = addressService.getById(orderCheckoutInDTO.getInvoiceAddressId());
         orderDetail.setInvoiceAddress(invoiceAddress.getContent());
+
         orderDetail.setComment(orderCheckoutInDTO.getComment());
+
         orderDetail.setOrderProducts(JSON.toJSONString(orderProductVOS));
 
         orderDetailMapper.insertSelective(orderDetail);
 
         return orderId;
-
     }
 
     @Override
@@ -113,4 +112,41 @@ public class OrderServiceImpl implements OrderService {
         return page;
     }
 
+    @Override
+    public OrderShowOutDTO getById(Long orderId) {
+        Order order = orderMapper.selectByPrimaryKey(orderId);
+        OrderDetail orderDetail = orderDetailMapper.selectByPrimaryKey(orderId);
+
+        OrderShowOutDTO orderShowOutDTO = new OrderShowOutDTO();
+        orderShowOutDTO.setOrderId(orderId);
+        orderShowOutDTO.setStatus(order.getStatus());
+        orderShowOutDTO.setTotalPrice(order.getTotalPrice());
+        orderShowOutDTO.setRewordPoints(order.getRewordPoints());
+        orderShowOutDTO.setCreateTimestamp(order.getCreateTime().getTime());
+        orderShowOutDTO.setUpdateTimestamp(order.getUpdateTime().getTime());
+
+        orderShowOutDTO.setShipMethod(orderDetail.getShipMethod());
+        orderShowOutDTO.setShipAddress(orderDetail.getShipAddress());
+        orderShowOutDTO.setShipPrice(orderDetail.getShipPrice());
+        orderShowOutDTO.setPayMethod(orderDetail.getPayMethod());
+        orderShowOutDTO.setInvoiceAddress(orderDetail.getInvoiceAddress());
+        orderShowOutDTO.setInvoicePrice(orderDetail.getInvoicePrice());
+        orderShowOutDTO.setComment(orderDetail.getComment());
+
+        List<OrderProductVO> orderProductVOS = JSON.parseArray(orderDetail.getOrderProducts(), OrderProductVO.class);
+        orderShowOutDTO.setOrderProducts(orderProductVOS);
+
+        List<OrderHistory> orderHistories = orderHistoryService.getByOrderId(orderId);
+        List<OrderHistoryListOutDTO> orderHistoryListOutDTOS = orderHistories.stream().map(orderHistory -> {
+            OrderHistoryListOutDTO orderHistoryListOutDTO = new OrderHistoryListOutDTO();
+            orderHistoryListOutDTO.setTimestamp(orderHistory.getTime().getTime());
+            orderHistoryListOutDTO.setOrderStatus(orderHistory.getOrderStatus());
+            orderHistoryListOutDTO.setComment(orderHistory.getComment());
+            return orderHistoryListOutDTO;
+        }).collect(Collectors.toList());
+
+        orderShowOutDTO.setOrderHistories(orderHistoryListOutDTOS);
+
+        return orderShowOutDTO;
+    }
 }

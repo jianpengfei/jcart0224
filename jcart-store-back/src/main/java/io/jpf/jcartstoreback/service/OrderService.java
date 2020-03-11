@@ -2,6 +2,7 @@ package io.jpf.jcartstoreback.service;
 
 import com.github.pagehelper.Page;
 import io.jpf.jcartstoreback.dto.in.OrderCheckoutInDTO;
+import io.jpf.jcartstoreback.dto.out.OrderShowOutDTO;
 import io.jpf.jcartstoreback.po.Order;
 
 public interface OrderService {
@@ -10,5 +11,7 @@ public interface OrderService {
                      Integer customerId);
 
     Page<Order> getByCustomerId(Integer pageNum, Integer customerId);
+
+    OrderShowOutDTO getById(Long orderId);
 
 }
