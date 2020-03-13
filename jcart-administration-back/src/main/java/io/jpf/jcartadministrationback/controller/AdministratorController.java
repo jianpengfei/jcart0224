@@ -223,8 +223,9 @@ public class AdministratorController {
         administrator.setRealName(administratorCreateInDTO.getRealName());
         administrator.setEmail(administratorCreateInDTO.getEmail());
         administrator.setAvatarUrl(administratorCreateInDTO.getAvatarUrl());
-        //用枚举来表示状态
-        administrator.setStatus((byte) AdministratorStatus.Enable.ordinal());
+        //用枚举来表示状态  之前写死了
+        //administrator.setStatus((byte) AdministratorStatus.Enable.ordinal());
+        administrator.setStatus(administratorCreateInDTO.getStatus());
         administrator.setCreateTime(new Date());
 
         //设置密码
