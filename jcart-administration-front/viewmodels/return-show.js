@@ -4,6 +4,7 @@ var app = new Vue({
         returnId: '',
         orderId: '',
         orderTimestamp: '',
+        customerId: '',
         customerName: '',
         mobile: '',
         email: '',
@@ -17,10 +18,27 @@ var app = new Vue({
         comment: '',
         createTimestamp: '',
         updateTimestamp: '',
-        returnHistories: []
+        statuses: [
+            { value: 0, label: '待处理' },
+            { value: 1, label: '待取货' },
+            { value: 2, label: '正在处理' },
+            { value: 3, label: '完成' },
+            { value: 4, label: '拒绝' }
+        ],
+        actions: [
+            { value: 0, label: '退货' },
+            { value: 1, label: '换货' },
+            { value: 2, label: '修理' }
+        ],
+        reasons: [
+            { value: 0, label: '发货过期' },
+            { value: 1, label: '订单错误' },
+            { value: 2, label: '收到错误商品' },
+            { value: 3, label: '质量问题' }
+        ],
+        selectedAction: ''
     },
     mounted() {
-        
         console.log('view mounted');
 
         var url = new URL(location.href);
@@ -33,6 +51,24 @@ var app = new Vue({
         this.getReturnById();
     },
     methods: {
+        handleUpdateAction() {
+            console.log('update action click');
+            this.updateReturnAction();
+        },
+        updateReturnAction() {
+            axios.post('/return/updateAction', {
+                returnId: this.returnId,
+                action: this.selectedAction
+            })
+                .then(function (response) {
+                    console.log(response);
+                    alert('处理方式更新成功');
+                    app.getReturnById();
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
         getReturnById() {
             axios.get('/return/getById', {
                 params: {
@@ -44,11 +80,13 @@ var app = new Vue({
                     var aReturn = response.data;
                     app.orderId = aReturn.orderId;
                     app.orderTimestamp = aReturn.orderTimestamp;
+                    app.customerId = aReturn.customerId;
                     app.customerName = aReturn.customerName;
                     app.mobile = aReturn.mobile;
                     app.email = aReturn.email;
                     app.status = aReturn.status;
                     app.action = aReturn.action;
+                    app.selectedAction = aReturn.action;
                     app.productCode = aReturn.productCode;
                     app.productName = aReturn.productName;
                     app.quantity = aReturn.quantity;
@@ -57,7 +95,6 @@ var app = new Vue({
                     app.comment = aReturn.comment;
                     app.createTimestamp = aReturn.createTimestamp;
                     app.updateTimestamp = aReturn.updateTimestamp;
-                    app.returnHistories = aReturn.returnHistories;
                 })
                 .catch(function (error) {
                     console.log(error);
